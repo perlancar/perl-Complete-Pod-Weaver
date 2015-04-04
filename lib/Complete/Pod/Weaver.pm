@@ -38,6 +38,11 @@ my %common_args = (
         },
 );
 
+$SPEC{':package'} = {
+    v => 1.1,
+    summary => 'Pod::Weaver-related completion routines',
+};
+
 $SPEC{complete_weaver_plugin} = {
     v => 1.1,
     summary => 'Complete with installed Pod::Weaver plugin names',
@@ -65,7 +70,7 @@ sub complete_weaver_plugin {
 
 $SPEC{complete_weaver_section} = {
     v => 1.1,
-    summary => 'Complete with installed Pod::Weaver section names',
+    summary => 'Complete with installed Pod::Weaver::Section names',
     args => {
         %common_args,
     },
