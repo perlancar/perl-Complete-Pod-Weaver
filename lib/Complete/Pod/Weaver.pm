@@ -8,7 +8,7 @@ use strict;
 use warnings;
 #use Log::Any '$log';
 
-use Complete::Setting;
+use Complete::Common qw(:all);
 
 our %SPEC;
 require Exporter;
@@ -20,24 +20,6 @@ our @EXPORT_OK = qw(
                        complete_weaver_role
                );
 
-my %common_args = (
-        word => {
-            schema => 'str*',
-            req => 1,
-            pos => 0,
-        },
-        ci => {
-            summary => 'Whether to do case-insensitive search',
-            schema  => 'bool*',
-        },
-        map_case => {
-            schema => 'bool',
-        },
-        exp_im_path => {
-            schema => 'bool',
-        },
-);
-
 $SPEC{':package'} = {
     v => 1.1,
     summary => 'Pod::Weaver-related completion routines',
@@ -47,7 +29,7 @@ $SPEC{complete_weaver_plugin} = {
     v => 1.1,
     summary => 'Complete with installed Pod::Weaver plugin names',
     args => {
-        %common_args,
+        %arg_word,
     },
     result_naked => 1,
 };
@@ -57,14 +39,10 @@ sub complete_weaver_plugin {
     my %args = @_;
 
     my $word = $args{word} // '';
-    my $ci          = $args{ci} // $Complete::Setting::OPT_CI;
-    my $map_case    = $args{map_case} // $Complete::Setting::OPT_MAP_CASE;
-    my $exp_im_path = $args{exp_im_path} // $Complete::Setting::OPT_EXP_IM_PATH;
 
     Complete::Module::complete_module(
         word => $word,
         ns_prefix => 'Pod::Weaver::Plugin',
-        ci=>$ci, map_case=>$map_case, exp_im_path=>$exp_im_path,
     );
 }
 
@@ -72,7 +50,7 @@ $SPEC{complete_weaver_section} = {
     v => 1.1,
     summary => 'Complete with installed Pod::Weaver::Section names',
     args => {
-        %common_args,
+        %arg_word,
     },
     result_naked => 1,
 };
@@ -82,14 +60,10 @@ sub complete_weaver_section {
     my %args = @_;
 
     my $word = $args{word} // '';
-    my $ci          = $args{ci} // $Complete::Setting::OPT_CI;
-    my $map_case    = $args{map_case} // $Complete::Setting::OPT_MAP_CASE;
-    my $exp_im_path = $args{exp_im_path} // $Complete::Setting::OPT_EXP_IM_PATH;
 
     Complete::Module::complete_module(
         word => $word,
         ns_prefix => 'Pod::Weaver::Section',
-        ci=>$ci, map_case=>$map_case, exp_im_path=>$exp_im_path,
     );
 }
 
@@ -97,7 +71,7 @@ $SPEC{complete_weaver_role} = {
     v => 1.1,
     summary => 'Complete with installed Pod::Weaver role names',
     args => {
-        %common_args,
+        %arg_word,
     },
     result_naked => 1,
 };
@@ -107,14 +81,10 @@ sub complete_weaver_role {
     my %args = @_;
 
     my $word = $args{word} // '';
-    my $ci          = $args{ci} // $Complete::Setting::OPT_CI;
-    my $map_case    = $args{map_case} // $Complete::Setting::OPT_MAP_CASE;
-    my $exp_im_path = $args{exp_im_path} // $Complete::Setting::OPT_EXP_IM_PATH;
 
     Complete::Module::complete_module(
         word => $word,
         ns_prefix => 'Pod::Weaver::Role',
-        ci=>$ci, map_case=>$map_case, exp_im_path=>$exp_im_path,
     );
 }
 
@@ -122,7 +92,7 @@ $SPEC{complete_weaver_bundle} = {
     v => 1.1,
     summary => 'Complete with installed Pod::Weaver bundle names',
     args => {
-        %common_args,
+        %arg_word,
     },
     result_naked => 1,
 };
@@ -132,14 +102,10 @@ sub complete_weaver_bundle {
     my %args = @_;
 
     my $word = $args{word} // '';
-    my $ci          = $args{ci} // $Complete::Setting::OPT_CI;
-    my $map_case    = $args{map_case} // $Complete::Setting::OPT_MAP_CASE;
-    my $exp_im_path = $args{exp_im_path} // $Complete::Setting::OPT_EXP_IM_PATH;
 
     Complete::Module::complete_module(
         word => $word,
         ns_prefix => 'Pod::Weaver::PluginBundle',
-        ci=>$ci, map_case=>$map_case, exp_im_path=>$exp_im_path,
     );
 }
 
